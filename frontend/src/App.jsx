@@ -16,7 +16,11 @@ import {
   Layers
 } from 'lucide-react';
 
-const BACKEND_URL = "http://localhost:8000";
+// Automatically detect local vs Vercel deployed environment
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 
+  (typeof window !== 'undefined' && window.location.hostname === 'localhost' && window.location.port === '5173'
+    ? 'http://localhost:8000'
+    : '');
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('phishing');
